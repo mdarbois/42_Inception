@@ -20,6 +20,10 @@ chmod +x wp-cli.phar
 # moves the WP-CLI PHAR file to the /usr/local/bin directory, which is in the system's PATH, and renames it to wp. This allows you to run the wp command from any directory
 mv wp-cli.phar /usr/local/bin/wp
 
+chown -R www-data:ww-data /var/www/html
+
+chmod -R 755 /var/www/html
+
 # downloads the latest version of WordPress to the current directory. The --allow-root flag allows the command to be run as the root user, which is necessary if you are logged in as the root user or if you are using WP-CLI with a system-level installation of WordPress.
 wp core download --allow-root
 

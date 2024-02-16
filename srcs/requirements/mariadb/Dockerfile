@@ -8,6 +8,8 @@ COPY conf/mariadb.conf	/etc/mysql/mariadb.conf.d/50-server.cnf
 
 COPY conf/script.sh /script.sh
 
-ENTRYPOINT [ "script.sh"]
+RUN chmod +x script.sh
+
+ENTRYPOINT [ "./script.sh"]
 
 EXPOSE 3306
