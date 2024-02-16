@@ -1,0 +1,18 @@
+DOMAIN_NAME=mdarbois.42.fr
+
+SQL_ROOT_PASSWORD=424242
+SQL_USER=mdarbois
+SQL_PASSWORD=424242
+SQL_DATABASE=wordpress
+
+WEBSITE_TITLE = INCEPTION
+ADMIN_USER = mdarbois
+ADMIN_PASSWORD = mdarbois000
+ADMIN_EMAIL = mdarbois@student.42berlin.de
+
+USER1_LOGIN = mdarbois
+USER1_PASSWORD = mdarbois000
+USER1_EMAIL = mdarbois@student.42berlin.de
+
+FTP_USER = mdarbois
+FTP_PASSWORD = mdarboisFTP
