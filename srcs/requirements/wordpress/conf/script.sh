@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # create directory to use in nginx container later and also to setup the wordpress conf
 mkdir /var/www/
 mkdir /var/www/html
@@ -20,9 +21,11 @@ chmod +x wp-cli.phar
 # moves the WP-CLI PHAR file to the /usr/local/bin directory, which is in the system's PATH, and renames it to wp. This allows you to run the wp command from any directory
 mv wp-cli.phar /usr/local/bin/wp
 
-chown -R www-data:ww-data /var/www/html
+chown -R www-data:www-data /var/www/html/
 
 chmod -R 755 /var/www/html
+
+cd /var/www/html/
 
 # downloads the latest version of WordPress to the current directory. The --allow-root flag allows the command to be run as the root user, which is necessary if you are logged in as the root user or if you are using WP-CLI with a system-level installation of WordPress.
 wp core download --allow-root
@@ -60,9 +63,7 @@ sed -i 's/listen = \/run\/php\/php7.3-fpm.sock/listen = 9000/g' /etc/php/7.3/fpm
 # creates the /run/php directory, which is used by PHP-FPM to store Unix domain sockets.
 mkdir /run/php
 
-
 wp redis enable --allow-root
-
 
 # starts the PHP-FPM service in the foreground. The -F flag tells PHP-FPM to run in the foreground, rather than as a daemon in the background.
 /usr/sbin/php-fpm7.3 -F

@@ -1,30 +1,34 @@
 all : up
 
 up :
-	@sudo mkdir -p /home/mdarbois/data/mysql
-	@sudo mkdir -p /home/mdarbois/data/wordpress
-	@docker-compose -f ./srcs/docker-compose.yml up -d --build
+	sudo mkdir -p /home/mdarbois/data/mysql
+	sudo mkdir -p /home/mdarbois/data/wordpress
+	sudo docker compose -f ./srcs/docker-compose.yml up -d --build
 
 down : 
-	@docker-compose -f ./srcs/docker-compose.yml down
+	sudo docker compose -f ./srcs/docker-compose.yml down
+	sudo rm -rf /home/mdarbois/data/mysql
+	sudo rm -rf /home/mdarbois/data/wordpress
 
 stop : 
-	@docker-compose -f ./srcs/docker-compose.yml stop
+	sudo docker compose -f ./srcs/docker-compose.yml stop
 
 start : 
-	@docker-compose -f ./srcs/docker-compose.yml start
+	sudo docker compose -f ./srcs/docker-compose.yml start
 
 status : 
-	@docker ps
+	sudo docker ps
 	
-re:
-	@docker-compose -f srcs/docker-compose.yml up -d --build
-
 clean:
-	@docker stop $$(docker ps -qa);\
-	docker rm $$(docker ps -qa);\
-	docker rmi -f $$(docker images -qa);\
-	docker volume rm $$(docker volume ls -q);\
-	docker network rm $$(docker network ls -q)
+	sudo docker stop $$(sudo docker ps -qa);\
+	sudo docker rm $$(sudo docker ps -qa);\
+	sudo docker rmi -f $$(sudo docker images -qa);\
+	sudo docker volume rm $$(sudo docker volume ls -q);\
+	sudo docker network rm $$(sudo docker network ls -q)
+	sudo rm -rf /home/mdarbois/data/mysql
+	sudo rm -rf /home/mdarbois/data/wordpress
+
+re: clean all
+
 
 .PHONY: all re down clean
