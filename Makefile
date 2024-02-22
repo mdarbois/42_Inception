@@ -19,19 +19,26 @@ stop :
 
 start :
 	sudo docker-compose -f ./srcs/docker-compose.yml start
+	sudo rm -rf /home/mdarbois/data/mysql
+	sudo rm -rf /home/mdarbois/data/wordpress
 
 status :
 	sudo docker ps
 
 clean: down
-
-#	sudo docker image rm -f $$(sudo docker image ls -q);\
-#	sudo docker container rm -f $$(sudo docker container ls -a -q);\
-#	sudo docker volume rm $$(sudo docker volume ls -q);\
-#	sudo docker network rm $$(sudo docker network ls -q)
 	sudo docker system prune -af
+	sudo docker image rm -f $$(sudo docker image ls -q);\
+	sudo docker container rm -f $$(sudo docker container ls -a -q);\
+	sudo docker volume rm $$(sudo docker volume ls -q);\
+	sudo docker network rm $$(sudo docker network ls -q)
+
+fclean: stop
+	sudo docker stop $$(docker ps -qa)
+	sudo system prune --all --force --volumes
+	sudo docker network prune --force
+	sudo docker volume prune --force
 
 re: clean up
 
 
-.PHONY: all up down stop start status clean re
+.PHONY: all up down stop start status clean fclean re

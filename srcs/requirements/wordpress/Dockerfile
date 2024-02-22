@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 
 EXPOSE 9000
 
@@ -8,12 +8,12 @@ RUN apt update -y
 RUN apt upgrade -y
 RUN apt-get -y install wget
 
-RUN apt install -y php-fpm\
-	php-mysql -y
+RUN apt-get install -y php php7.3 php-fpm php-mysql mariadb-client
 RUN apt install curl -y
 
-COPY conf/script.sh /script.sh
+COPY conf/php.conf /etc/php/7.3/fpm/pool.d/www.conf
+COPY conf/script.sh /usr/local/bin
 
-RUN  chmod +x script.sh
+RUN  chmod +x /usr/local/bin/script.sh
 
-ENTRYPOINT ["./script.sh"]
+ENTRYPOINT ["/usr/local/bin/script.sh"]

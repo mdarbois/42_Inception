@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 
 EXPOSE 443
 
@@ -17,6 +17,6 @@ RUN openssl req -x509 -nodes -newkey rsa:4096 -days 365 \
 
 #store nginx logs
 RUN mkdir -p /var/run/nginx
-COPY conf/nginx.conf  /etc/nginx/conf.d/nginx.conf
+COPY conf/nginx.conf  /etc/nginx/conf.d
 
 CMD [ "nginx", "-g", "daemon off;" ]

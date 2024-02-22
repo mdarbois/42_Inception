@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 
 EXPOSE 3306
 
@@ -10,8 +10,6 @@ COPY conf/mariadb.conf	/etc/mysql/mariadb.conf.d/50-server.cnf
 
 COPY conf/script.sh /usr/local/bin/
 
-RUN chmod +x script.sh
+RUN chmod +x /usr/local/bin/script.sh
 
-ENTRYPOINT [ "./script.sh"]
-
-EXPOSE 3306
+ENTRYPOINT [ "/usr/local/bin/script.sh"]
