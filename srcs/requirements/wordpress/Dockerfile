@@ -1,5 +1,7 @@
 FROM debian:buster
 
+EXPOSE 9000
+
 RUN apt-get -y update
 RUN apt-get -y upgrade -y
 RUN apt update -y

@@ -1,5 +1,7 @@
 FROM debian:buster
 
+EXPOSE 443
+
 RUN apt update -y
 RUN apt upgrade -y
 RUN apt install nginx -y
@@ -13,8 +15,8 @@ RUN openssl req -x509 -nodes -newkey rsa:4096 -days 365 \
     -keyout /etc/nginx/ssl/inception.key \
     -subj "/C=DE/ST=Berlin/L=Berlin/O=42 School/OU=mdarbois/CN=mdarbois/"
 
+#store nginx logs
 RUN mkdir -p /var/run/nginx
-COPY conf/nginx.conf /etc/nginx/nginx.conf
-
+COPY conf/nginx.conf  /etc/nginx/conf.d/nginx.conf
 
 CMD [ "nginx", "-g", "daemon off;" ]
