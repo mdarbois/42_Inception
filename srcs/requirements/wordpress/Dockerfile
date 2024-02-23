@@ -12,8 +12,11 @@ RUN apt-get install -y php php7.3 php-fpm php-mysql mariadb-client
 RUN apt install curl -y
 
 COPY conf/php.conf /etc/php/7.3/fpm/pool.d/www.conf
-COPY conf/script.sh /usr/local/bin
+COPY conf/wp_script.sh /usr/local/bin
 
-RUN  chmod +x /usr/local/bin/script.sh
+RUN  chmod +x /usr/local/bin/wp_script.sh
 
-ENTRYPOINT ["/usr/local/bin/script.sh"]
+ENTRYPOINT ["/usr/local/bin/wp_script.sh"]
+#WORKDIR /var/www/wordpress
+
+# ENTRYPOINT cat /var/www/wordpress/wp-config.php

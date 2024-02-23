@@ -6,10 +6,10 @@ RUN apt-get update -y
 RUN apt-get upgrade -y
 RUN apt-get install mariadb-server -y
 
-COPY conf/mariadb.conf	/etc/mysql/mariadb.conf.d/50-server.cnf
+COPY conf/mariadb.cnf	/etc/mysql/mariadb.conf.d/50-server.cnf
 
-COPY conf/script.sh /usr/local/bin/
+COPY conf/maria_script.sh /usr/local/bin/
 
-RUN chmod +x /usr/local/bin/script.sh
+RUN chmod +x /usr/local/bin/maria_script.sh
 
-ENTRYPOINT [ "/usr/local/bin/script.sh"]
+ENTRYPOINT [ "/usr/local/bin/maria_script.sh"]

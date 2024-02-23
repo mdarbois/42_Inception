@@ -34,7 +34,7 @@ clean: down
 
 fclean: stop
 	sudo docker stop $$(docker ps -qa)
-	sudo system prune --all --force --volumes
+	sudo docker system prune --all --force --volumes
 	sudo docker network prune --force
 	sudo docker volume prune --force
 

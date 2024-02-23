@@ -16,7 +16,7 @@ services:
   container_name: wordpress
   env_file: .env
   volumes:
-   - wordpress_volume:/var/www/html
+   - wordpress_volume:/var/www/wordpress
   networks:
    - inception
   build: ./requirements/wordpress
@@ -27,7 +27,7 @@ services:
  nginx:
   container_name: nginx
   volumes:
-   - wordpress_volume:/var/www/html
+   - wordpress_volume:/var/www/wordpress
   networks:
    - inception
   depends_on:
@@ -38,45 +38,45 @@ services:
    - 443:443
   restart: always
 
-# adminer:
-#  container_name: adminer
-#  networks:
-#   - inception
-#  depends_on:
-#   - mariadb
-#  build: ./requirements/bonus/adminer
-#  env_file: .env
-#  ports:
-#   - "8080:8080"
-#  restart: always
+ adminer:
+  container_name: adminer
+  networks:
+   - inception
+  depends_on:
+   - mariadb
+  build: ./requirements/bonus/adminer
+  env_file: .env
+  ports:
+   - "8080:8080"
+  restart: always
 
-# ftp:
-#  container_name: ftp
-#  volumes:
-#   - wordpress_volume:/var/www/html
-# networks:
-#   - inception
-#  depends_on:
-#   - wordpress
-#  build: ./requirements/bonus/ftp
-#  env_file: .env
-#  ports:
-#  - "21:21"
-#  restart: always
+ ftp:
+  container_name: ftp
+  volumes:
+   - wordpress_volume:/var/www/wordpress
+  networks:
+   - inception
+  depends_on:
+   - wordpress
+  build: ./requirements/bonus/ftp
+  env_file: .env
+  ports:
+    - "21:21"
+  restart: always
 
-# redis:
-#  container_name: redis
+ redis:
+  container_name: redis
 #  volumes:
-#   - wordpress_volume:/var/www/html
-#  networks:
-#   - inception
-#  depends_on:
-#   - wordpress
-#  build: ./requirements/bonus/redis
-#  env_file: .env
-#  ports:
-#   -"6379:6379"
-#  restart: always
+#    - wordpress_volume:/var/www/wordpress
+  networks:
+    - inception
+  depends_on:
+    - wordpress
+  build: ./requirements/bonus/redis
+  env_file: .env
+  ports:
+    - "6379:6379"
+  restart: always
 
 volumes:
  mariadb_volume:

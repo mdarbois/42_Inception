@@ -2,10 +2,12 @@ FROM debian:buster
 
 RUN apt update -y
 
-COPY ./tools/script.sh /
+COPY ./tools/ftp_script.sh /
+
+RUN chmod +x /ftp_script.sh
 
 RUN apt install vsftpd -y
 
 EXPOSE 21
 
-CMD ["/script.sh"]
+CMD ["/ftp_script.sh"]
