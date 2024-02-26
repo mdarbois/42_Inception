@@ -1,15 +1,20 @@
 #!/bin/bash
+
+cd /var/www
+
+if [ ! -e /var/www/wordpress/ ] then 
 wget https://wordpress.org/wordpress-6.3.tar.gz -P .
 tar -xzf wordpress-6.3.tar.gz && rm -rf wordpress-6.3.tar.gz
-chown -R root:root /var/www/wordpress
+chown -R www-data:www-data /var/www/wordpress
+
+fi
 
 until mysql --host=mariadb --user=$SQL_USER --password=$SQL_PASSWORD -e '\c'; do
     echo >&2 "`date`: maria is sleeping"
     sleep 2
 done
 
-cd /var/www
-
+cd /var/www/wordpress 
 #download wordpress
 # downloads the latest version of WordPress to the current directory. The --allow-root flag allows the command to be run as the root user, which is necessary if you are logged in as the root user or if you are using WP-CLI with a system-level installation of WordPress.
 #wp core download --path=/var/www/wordpress --allow-root
@@ -23,7 +28,8 @@ chmod +x wp-cli.phar
 # moves the WP-CLI PHAR file to the /usr/local/bin directory, which is in the system's PATH, and renames it to wp. This allows you to run the wp command from any directory
 mv wp-cli.phar /usr/local/bin/wp
 
-cd /var/www/wordpress 
+chown -R www-data:www-data /var/www/wordpress
+chmod -R 755 /var/www/wordpress
 
 
 if [ ! -e /var/www/wordpress/wp-config.php ]; then

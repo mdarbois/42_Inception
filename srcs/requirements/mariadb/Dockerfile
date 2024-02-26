@@ -2,11 +2,11 @@ FROM debian:bullseye
 
 EXPOSE 3306
 
-RUN apt-get update -y
-RUN apt-get upgrade -y
-RUN apt-get install mariadb-server -y
+RUN apt update -y
+RUN apt upgrade -y
+RUN apt install mariadb-server -y
 
-COPY conf/mariadb.cnf	/etc/mysql/mariadb.conf.d/50-server.cnf
+# COPY conf/mariadb.conf	/etc/mysql/mariadb.conf.d/50-server.cnf
 
 COPY conf/maria_script.sh /usr/local/bin/
 
