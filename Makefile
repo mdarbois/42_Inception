@@ -1,8 +1,8 @@
 all : up
 
 up :
-	sudo mkdir -p /home/mdarbois/data/mysql
-	sudo mkdir -p /home/mdarbois/data/wordpress
+	sudo mkdir -p /Users/mariedarbois/data/mysql
+	sudo mkdir -p /Users/mariedarbois/data/wordpress
 	sudo docker-compose -f ./srcs/docker-compose.yml up -d --build
 #-d detach mode: will build it in the background
 #up: if the images are ready it will run them inside the container, otherwise it will build them
@@ -10,8 +10,8 @@ up :
 
 down :
 	sudo docker-compose -f ./srcs/docker-compose.yml down -v
-	sudo rm -rf /home/mdarbois/data/mysql
-	sudo rm -rf /home/mdarbois/data/wordpress
+	sudo rm -rf /Users/mariedarbois/data/mysql
+	sudo rm -rf /Users/mariedarbois/data/wordpress
 #down: stop and remove the containers but the images are still there
 # -v removes any volumes associated with the containers being stopped and removed
 stop :
@@ -19,8 +19,8 @@ stop :
 
 start :
 	sudo docker-compose -f ./srcs/docker-compose.yml start
-	sudo rm -rf /home/mdarbois/data/mysql
-	sudo rm -rf /home/mdarbois/data/wordpress
+	sudo rm -rf /Users/mariedarbois/data/mysql
+	sudo rm -rf /Users/mariedarbois/data/wordpress
 
 status :
 	sudo docker ps

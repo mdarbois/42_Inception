@@ -2,12 +2,9 @@
 
 if [ ! -d /var/lib/mysql/$SQL_DATABASE ]; then
    mysql_install_db
-    
-fi
+   /usr/share/mariadb/mysql.server start
 
-sed -i 's/bind-address            = 127.0.0.1/bind-address = 0.0.0.0/g' /etc/mysql/mariadb.conf.d/50-server.cnf
-
-service mysql start;
+#sed -i 's/bind-address            = 127.0.0.1/bind-address = 0.0.0.0/g' /etc/mysql/mariadb.conf.d/50-server.cnf
 
 mysql -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;"
 
@@ -20,5 +17,5 @@ mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWORD}';"
 mysql -e "FLUSH PRIVILEGES;"
 
 mysqladmin -u root -p$SQL_ROOT_PASSWORD shutdown
-
+fi
 exec mysqld_safe

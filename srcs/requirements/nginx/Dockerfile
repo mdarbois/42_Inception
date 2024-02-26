@@ -2,13 +2,13 @@ FROM debian:bullseye
 
 EXPOSE 443
 
-RUN apt update -y
-RUN apt upgrade -y
-RUN apt install nginx -y
-RUN apt install vim -y 
-RUN apt install curl -y 
+RUN apt-get update -y
+RUN apt-get upgrade -y
+RUN apt-get install nginx -y
+RUN apt-get install vim -y
+RUN apt-get install curl -y
 
-RUN apt install openssl -y
+RUN apt-get install openssl -y
 RUN mkdir -p /etc/nginx/ssl
 RUN openssl req -x509 -nodes -newkey rsa:4096 -days 365 \
     -out /etc/nginx/ssl/inception.crt \
