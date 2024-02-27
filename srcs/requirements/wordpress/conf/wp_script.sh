@@ -2,11 +2,10 @@
 
 cd /var/www
 
-if [ ! -e /var/www/wordpress/ ] then 
-wget https://wordpress.org/wordpress-6.3.tar.gz -P .
-tar -xzf wordpress-6.3.tar.gz && rm -rf wordpress-6.3.tar.gz
-chown -R www-data:www-data /var/www/wordpress
-
+if [ ! -e /var/www/wordpress/ ]; then 
+    wget https://wordpress.org/wordpress-6.3.tar.gz -P .
+    tar -xzf wordpress-6.3.tar.gz && rm -rf wordpress-6.3.tar.gz
+    chown -R www-data:www-data /var/www/wordpress
 fi
 
 until mysql --host=mariadb --user=$SQL_USER --password=$SQL_PASSWORD -e '\c'; do

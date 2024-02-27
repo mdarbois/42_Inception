@@ -1,14 +1,6 @@
 #!/bin/bash
 
-if [ ! -d /var/lib/mysql/$SQL_DATABASE ]; then
-  mysql_install_db
-  /usr/share/mariadb/mysql.server start
-
-#chmod -R 770 /var/lib/mysql
-#chgrp -R mysql /var/lib/mysql
-#chmod 755 /etc/init.d/mysql
-
-#service mysql start
+service mysql start;
 
 mysql -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;"
 
@@ -21,5 +13,5 @@ mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '${SQL_ROOT_PASSWORD}';"
 mysql -e "FLUSH PRIVILEGES;"
 
 mysqladmin -u root -p$SQL_ROOT_PASSWORD shutdown
-fi
+
 exec mysqld_safe

@@ -1,16 +1,18 @@
-FROM debian:bullseye
+FROM alpine:3.19
 
 EXPOSE 3306
 
-RUN apt-get update -y
-RUN apt-get upgrade -y
-RUN apt-get install systemd -y
-RUN apt-get install mariadb-server -y
+RUN apk update
+RUN apk add --no-cache mariadb mariadb-client
 
-COPY conf/mariadb.conf	/etc/mysql/mariadb.conf.d/50-server.cnf
+COPY conf/mariadb.conf	/etc/my.cnf.d/mariadb-server.cnf
 
-COPY conf/maria_script.sh /usr/local/bin/
+COPY ./conf/maria_script.sh /
 
-RUN chmod +x /usr/local/bin/maria_script.sh
+RUN chmod +x /maria_script.sh
 
-ENTRYPOINT [ "/usr/local/bin/maria_script.sh"]
+ENTRYPOINT [ "sh", "/maria_script.sh" ]
+
+STOPSIGNAL SIGQUIT
+
+CMD [ "mysql_safe" ]
