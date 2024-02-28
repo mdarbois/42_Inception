@@ -1,14 +1,14 @@
 #!/bin/bash
 
 if [ ! -d /var/lib/mysql/$SQL_DATABASE ]; then
-  mysql_install_db
-  /usr/share/mariadb/mysql.server start
+  #mysql_install_db
+  #/usr/share/mariadb/mysql.server start
 
 #chmod -R 770 /var/lib/mysql
 #chgrp -R mysql /var/lib/mysql
 #chmod 755 /etc/init.d/mysql
 
-#service mysql start
+service mariadb start
 
 mysql -e "CREATE DATABASE IF NOT EXISTS \`${SQL_DATABASE}\`;"
 
